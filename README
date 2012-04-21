@@ -1,0 +1,34 @@
+Simple Tomcat 7 based wrapper for JWt web apps.
+
+For more information, please check out http://blog.elevat.eu/
+
+Configuration file format:
+
+{
+
+# port to start tomcat on
+"port":8888,
+
+# the name of the .rb file, which contains the WApplication class, without
+# .rb extension
+"servletfile":"OALogin",
+
+# the name of the class
+"servletclass":"OALogin",
+
+
+"pidfile":"/tmp/jruby-pidfile",
+
+# this command stops the server:
+# touch /tmp/jruby-please-stop-`cat /tmp/jruby-pidfile`
+"stopfile":"/tmp/jruby-please-stop-",
+
+# app base directory, not really used now
+"basedir":"/full/path/to/your/app/base/",
+
+# optional: the path to the JWt config file
+"jwt-config-file":"/full/path/to/properties.xml"
+}
+
+
+Example usage: jruby tserver.rb config.json
