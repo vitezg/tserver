@@ -11,6 +11,7 @@ Configuration file format:
 
 # the name of the .rb file, which contains the WApplication class, without
 # .rb extension
+# the file has to be in ruby's search path
 "servletfile":"OALogin",
 
 # the name of the class
