@@ -53,7 +53,7 @@ begin
   tomcat.destroy
   puts "Tomcat stopped."
 rescue
-rescue Exception
+rescue java.lang.Throwable
 end
 
 File.unlink($myconfig["pidfile"])
