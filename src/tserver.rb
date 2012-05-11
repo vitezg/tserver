@@ -9,6 +9,8 @@ import "org.apache.catalina.connector.Connector"
 require "rubygems"
 require "active_support"
 
+require "ripl"
+
 $myconfig = ActiveSupport::JSON.decode(File.new(ARGV[ 0]).read)
 File.open($myconfig["pidfile"], 'w') {|f| f.write(Process.pid.to_s+"\n")}
 
@@ -44,6 +46,15 @@ puts
 puts "touch "+$myconfig["stopfile"] + Process.pid.to_s
 puts
 puts
+
+
+Thread.new do
+  while true
+    Ripl.start
+  end
+end
+            
+
 while ! File.exists?($myconfig["stopfile"] + Process.pid.to_s)
   sleep 1
 end
