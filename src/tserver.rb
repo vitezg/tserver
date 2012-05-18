@@ -31,12 +31,16 @@ tomcat.setConnector(con)
 
 ctx = tomcat.addContext("", $myconfig["basedir"])
 
-wtservlet = MyServlet.new
+wrapper=tomcat.addServlet("", "jwt example", MyServlet.new)
+
 if $myconfig.has_key?("jwt-config-file")
-  wtservlet.setConfiguration(Configuration.new(java.io.File.new($myconfig["jwt-config-file"])))
+  wrapper.addInitParameter("jwt-config-file",$myconfig["jwt-config-file"])
 end
 
-tomcat.addServlet("", "jwt example", wtservlet)
+if $myconfig.has_key?("applicationtype")
+  wrapper.addInitParameter("ApplicationType",$myconfig["applicationtype"])
+end
+                                                
 ctx.addServletMapping("/*", "jwt example")
 ctx.addApplicationListener("eu.webtoolkit.jwt.ServletInit")
 
